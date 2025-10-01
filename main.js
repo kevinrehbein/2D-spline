@@ -89,4 +89,5 @@ generateButton.addEventListener("click", () => {
 clearButton.addEventListener("click", () => {
   board.clearRect(0, 0, 800, 400);
   controlPoints = [];
+  pontos.textContent = "Pontos: " + controlPoints.length;
 });
