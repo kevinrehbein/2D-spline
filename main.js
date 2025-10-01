@@ -2,6 +2,7 @@ const canvas = document.querySelector(".board");
 const board = canvas.getContext("2d");
 
 const generateButton = document.querySelector("#generatebutton");
+const clearButton = document.querySelector("#clearbutton");
 
 let pontos = document.querySelector(".points h5");
 
@@ -45,7 +46,7 @@ function generateCatmullSpline(controlPoints) {
     p1 = controlPoints[i];
     p2 = controlPoints[i + 1];
 
-    for (let j = 0; j < pointsPerSegment; j++) {
+    for (let j = 0; j <= pointsPerSegment; j++) {
       let t = j / pointsPerSegment;
       splinePoints.push(setIntermediatePoints(p0, p1, p2, p3, t));
       /*
@@ -64,24 +65,28 @@ function generateCatmullSpline(controlPoints) {
   board.beginPath();
   board.moveTo(splinePoints[0].x, splinePoints[0].y);
   for (let i = 1; i < splinePoints.length; i++) {
+    //board.arc(splinePoints[i].x, splinePoints[i].y, 1, 0, 2 * Math.PI); //pontos intermediarios
     board.lineTo(splinePoints[i].x, splinePoints[i].y);
   }
   board.stroke();
 }
 
 canvas.addEventListener("click", (event) => {
-  if (controlPoints.length < 10) {
-    controlPoints.push({ x: event.offsetX, y: event.offsetY });
+  controlPoints.push({ x: event.offsetX, y: event.offsetY });
 
-    board.beginPath();
-    board.arc(event.offsetX, event.offsetY, 5, 0, 2 * Math.PI); // Ponto nas coordenadas (x, y) com raio 5
-    board.fill();
+  board.beginPath();
+  board.arc(event.offsetX, event.offsetY, 5, 0, 2 * Math.PI); // Ponto nas coordenadas (x, y) com raio 5
+  board.fill();
 
-    pontos.textContent = "Pontos Restantes: " + (10 - controlPoints.length);
-    console.log(controlPoints);
-  }
+  pontos.textContent = "Pontos: " + controlPoints.length;
+  console.log(controlPoints);
 });
 
 generateButton.addEventListener("click", () => {
   generateCatmullSpline(controlPoints);
+});
+
+clearButton.addEventListener("click", () => {
+  board.clearRect(0, 0, 800, 400);
+  controlPoints = [];
 });
