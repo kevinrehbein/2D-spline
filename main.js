@@ -61,15 +61,36 @@ function generateCatmullSpline(controlPoints) {
 
   console.log(splinePoints);
 
-  board.strokeStyle = "blue";
-  board.lineWidth = 3;
+  // Glow effect — camada exterior
+  board.strokeStyle = "rgba(167,139,250,0.15)";
+  board.lineWidth = 10;
   board.beginPath();
   board.moveTo(splinePoints[0].x, splinePoints[0].y);
-  for (let i = 1; i < splinePoints.length; i++) {
-    //board.arc(splinePoints[i].x, splinePoints[i].y, 1, 0, 2 * Math.PI); //pontos intermediarios
+  for (let i = 1; i < splinePoints.length; i++)
     board.lineTo(splinePoints[i].x, splinePoints[i].y);
-  }
   board.stroke();
+
+  // Linha principal
+  board.strokeStyle = "#4f9eff";
+  board.lineWidth = 2.5;
+  board.beginPath();
+  board.moveTo(splinePoints[0].x, splinePoints[0].y);
+  for (let i = 1; i < splinePoints.length; i++)
+    board.lineTo(splinePoints[i].x, splinePoints[i].y);
+  board.stroke();
+}
+
+function drawControlPoint(x, y) {
+  // Anel externo
+  board.beginPath();
+  board.arc(x, y, 7, 0, 2 * Math.PI);
+  board.fillStyle = "rgba(79,158,255,0.15)";
+  board.fill();
+  // Ponto central
+  board.beginPath();
+  board.arc(x, y, 3.5, 0, 2 * Math.PI);
+  board.fillStyle = "#4f9eff";
+  board.fill();
 }
 
 canvas.addEventListener("click", (event) => {
@@ -78,15 +99,7 @@ canvas.addEventListener("click", (event) => {
 
   console.log(controlPoints);
 
-  board.beginPath();
-  board.arc(
-    controlPoints[length - 1].x,
-    controlPoints[length - 1].y,
-    5,
-    0,
-    2 * Math.PI,
-  ); // Ponto nas coordenadas (x, y) com raio 5
-  board.fill();
+  drawControlPoint(controlPoints[length - 1].x, controlPoints[length - 1].y);
 
   pontos.textContent = "Pontos: " + controlPoints.length;
   console.log(controlPoints);
@@ -95,11 +108,7 @@ canvas.addEventListener("click", (event) => {
 generateButton.addEventListener("click", () => {
   board.clearRect(0, 0, 800, 400);
 
-  controlPoints.forEach((point) => {
-    board.beginPath();
-    board.arc(point.x, point.y, 5, 0, 2 * Math.PI); // Ponto nas coordenadas (x, y) com raio 5
-    board.fill();
-  });
+  controlPoints.forEach((point) => drawControlPoint(point.x, point.y));
 
   generateCatmullSpline(controlPoints);
 });

@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -8,18 +8,27 @@
     <title>2D Spline</title>
   </head>
   <body>
-    <div class="container">
-      <canvas class="board" width="800" height="400"
-        >Este brownser não suporta canvas</canvas
-      >
+    <header>
+      <p class="label">Curvas Paramétricas</p>
+      <h1>Catmull-Rom Spline</h1>
+      <p>Clique no canvas para adicionar pontos de controlo</p>
+    </header>
+
+    <div class="card">
+      <canvas class="board" width="800" height="420"></canvas>
     </div>
-    <div class="container points">
-      <h5>Pontos: 0</h5>
+
+    <div class="controls">
+      <div class="points">
+        <div class="dot-indicator"></div>
+        <h5>Pontos: 0</h5>
+      </div>
+      <div class="buttons">
+        <button id="clearbutton">Limpar</button>
+        <button id="generatebutton">Gerar Curva</button>
+      </div>
     </div>
-    <div class="container buttons">
-      <button id="generatebutton">Generate</button>
-      <button id="clearbutton">Clear</button>
-    </div>
+
+    <p class="hint">Mínimo de <span>2 pontos</span> para gerar resultados</p>
   </body>
 </html>
-!
