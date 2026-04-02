@@ -1,5 +1,3 @@
-# 2D-spline
-
 # 2D Spline Visualizer - Catmull-Rom
 
 Este projeto é uma ferramenta interativa desenvolvida em ambiente web para a exploração e visualização de curvas paramétricas, especificamente a **Catmull-Rom Spline**.
