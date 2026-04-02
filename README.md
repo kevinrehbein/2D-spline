@@ -39,9 +39,11 @@ A aplicação permite que utilizadores criem trajetórias suaves através de pon
 
 ## 📁 Estrutura de Ficheiros
 
+```
 ├── index.html # Estrutura principal e canvas
 ├── main.js # Lógica e algoritmos da curva
 └── style.css # Estilos e layout
+```
 
 ---
 
